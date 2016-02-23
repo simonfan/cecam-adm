@@ -1,0 +1,25 @@
+{
+  "name": "cecam-adm",
+  "authors": [
+    "-"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.0",
+    "angular-bootstrap": "^1.1.2",
+    "angular-ui-router": "^0.2.18",
+    "angularfire": "^1.1.4",
+    "bootstrap": "^3.3.6"
+  }
+}
