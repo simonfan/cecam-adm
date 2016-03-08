@@ -1,0 +1,14 @@
+.content {
+	// width: 80%;
+	margin: 0 40px;
+}
+
+.modal-distribuir .content-area {
+	border-bottom: 1px solid #e5e5e5;
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+}
+
+.modal-distribuir .content-area table {
+	margin: 5px 0 5px 0;
+}

@@ -3,16 +3,22 @@
   <title>Cecam admin</title>
 
   <link rel="stylesheet" type="text/css" href="index.bundle.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body ng-controller="AppCtrl">
 
-  <nav>oi</nav>
-  
-  <a href="#/">home</a>
-  <a href="#/estoque">estoque</a>
+  <div class="content">
 
-  <div ui-view>
+    <nav>oi</nav>
+    
+    <a href="#/">home</a>
+    <a href="#/estoque">estoque</a>
 
+    <div ui-view>
+    </div>
+
+
+    
   </div>
 
   <script src="bower_components/angular/angular.js"></script>
@@ -21,6 +27,9 @@
   <!-- firebase -->
   <script src="bower_components/firebase/firebase.js"></script>
   <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
+
+  <!-- ui bootstrap -->
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
   <script src="js/controllers.js"></script>
   <script src="js/services.js"></script>

@@ -5,3 +5,48 @@ estoque
     {{ operacao.descricao }}
   </li>
 </ul>
+
+
+<table class="table table-hover table-bordered">
+  <thead class="thead-default">
+    <tr>
+      <th>Produto</th>
+      <th>Validade</th>
+      <th>Quantidade</th>
+      <th>Unidade</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>A</td>
+      <td>2 Abr 2016</td>
+      <td>50</td>
+      <td>caixas</td>
+      <td>
+        <p>entrou</p>
+        <button class="btn btn-primary" ng-click="open()">distribuir</button>
+      </td>
+    </tr>
+    <tr>
+      <td>B</td>
+      <td>27 Mar 2016</td>
+      <td>230</td>
+      <td>caixas</td>
+      <td>
+        <p>entrou</p>
+        <button class="btn btn-primary">distribuir</button>
+      </td>
+    </tr>
+    <tr>
+      <td>C</td>
+      <td>7 Mar 2016</td>
+      <td>57</td>
+      <td>caixas</td>
+      <td>
+        <p>entrou</p>
+        <button class="btn btn-primary">distribuir</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
