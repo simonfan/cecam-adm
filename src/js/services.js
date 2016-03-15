@@ -40,3 +40,28 @@ angular.module('cecamAdm.services', [])
     }
   }
 })
+
+.factory('Distribuicao', function ($http) {
+  return {
+    create: function (data) {
+      return $http.post('http://localhost:4000/estoque/distribuicao', data)
+        .then(function (response) {
+          return response.data;
+        });
+    },
+
+    list: function (query) {
+      return $http.get('http://localhost:4000/estoque/distribuicoes', {
+        params: query,
+      });
+    }
+  }
+})
+
+.factory('Receptor', function ($http) {
+  return {
+    list: function (query) {
+      return $http.get('http://localhost:4000/estoque/receptores', query);
+    }
+  }
+});

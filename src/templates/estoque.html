@@ -28,10 +28,10 @@ estoque
         <p class="quantidade-distribuida">
           {{ item.estoque - item.aDistribuir }} distribuido
         </p>
-        <button ng-if="item.aDistribuir > 0" class="btn btn-primary" ng-click="open()">
+        <button ng-if="item.aDistribuir > 0" class="btn btn-primary" ng-click="openModalDistribuir(item)">
           distribuir
         </button>
-        <button ng-if="item.aDistribuir === 0" class="btn btn-primary" ng-click="open()">
+        <button ng-if="item.aDistribuir === 0" class="btn btn-primary" ng-click="openModalDistribuir(item)">
           ver detalhes
         </button>
       </td>
