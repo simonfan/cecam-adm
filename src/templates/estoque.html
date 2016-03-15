@@ -18,34 +18,22 @@ estoque
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>A</td>
-      <td>2 Abr 2016</td>
-      <td>50</td>
-      <td>caixas</td>
+
+    <tr ng-repeat="item in resumo">
+      <td>{{ item.descricao }}</td>
+      <td>{{ item.validade | date: "dd-mm-yyyy" }}</td>
+      <td>{{ item.estoque }}</td>
+      <td>{{ item.unidadeDeMedida }}</td>
       <td>
-        <p>entrou</p>
-        <button class="btn btn-primary" ng-click="open()">distribuir</button>
-      </td>
-    </tr>
-    <tr>
-      <td>B</td>
-      <td>27 Mar 2016</td>
-      <td>230</td>
-      <td>caixas</td>
-      <td>
-        <p>entrou</p>
-        <button class="btn btn-primary">distribuir</button>
-      </td>
-    </tr>
-    <tr>
-      <td>C</td>
-      <td>7 Mar 2016</td>
-      <td>57</td>
-      <td>caixas</td>
-      <td>
-        <p>entrou</p>
-        <button class="btn btn-primary">distribuir</button>
+        <p class="quantidade-distribuida">
+          {{ item.estoque - item.aDistribuir }} distribuido
+        </p>
+        <button ng-if="item.aDistribuir > 0" class="btn btn-primary" ng-click="open()">
+          distribuir
+        </button>
+        <button ng-if="item.aDistribuir === 0" class="btn btn-primary" ng-click="open()">
+          ver detalhes
+        </button>
       </td>
     </tr>
   </tbody>
