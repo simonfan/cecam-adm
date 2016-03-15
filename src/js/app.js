@@ -2,7 +2,8 @@ angular.module('cecamAdm', [
   'cecamAdm.controllers',
   'cecamAdm.services',
   'firebase',
-  'ui.router'
+  'ui.router',
+  'ui.grid'
 ])
 
 .config(function($stateProvider, $urlRouterProvider) {

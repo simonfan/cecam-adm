@@ -1,6 +1,42 @@
 angular.module('cecamAdm.services', [])
 
-.factory('Operacoes', function($firebaseArray) {
-  var itemsRef = new Firebase("https://cecam.firebaseio.com/Operacoes");
-  return $firebaseArray(itemsRef);
+.factory('Operacao', function ($http) {
+  return {
+    list: function (query) {
+      return $http.get('http://localhost:4000/estoque/operacoes', {
+        data: query
+      });
+    },
+
+    create: function (data) {
+      return $http.post('http://localhost:4000/estoque/operacao', data)
+        .then(function (response) {
+          return response.data;
+        });
+    }
+  };
+})
+
+.factory('Produto', function ($http) {
+  return {
+    get: function (produtoId) {
+      return $http.get('http://localhost:4000/estoque/produto/' + produtoId);
+    },
+
+    list: function () {
+      return $http.get('http://localhost:4000/estoque/produtos');
+    },
+
+    create: function (data) {
+      return $http.post('http://localhost:4000/estoque/produto', data);
+    }
+  }
+})
+
+.factory('Estoque', function ($http) {
+  return {
+    getResumo: function () {
+      return $http.get('http://localhost:4000/estoque/resumo');
+    }
+  }
 })
