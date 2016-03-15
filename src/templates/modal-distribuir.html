@@ -1,82 +1,67 @@
 <div class="modal-distribuir">
 	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<button type="button" class="close" ng-click="$dismiss()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		<h4 class="modal-title">Distribuir produto pelas unidades do SESC</h4>
 	</div>
 	<div class="modal-body">
 		<div class="content-area">
-			Produto A<br>
-			30 caixas (0 distribuidas)<br>
-			validade 30 Abr 2016
+			{{ resumo.descricao }}<br>
+			{{ resumo.estoque }} {{ resumo.unidadeDeMedida }} ({{ resumo.estoque - resumo.aDistribuir }} distribuido)<br>
+			validade: <b>{{ resumo.validade | date: "dd-MM-yyyy" }}</b>
 		</div>
 
-		<!-- <div class="content-area">
-			<table class="table">
-			  <thead class="thead-default">
-			    <tr>
-			      <th>Unidade</th>
-			      <th>Quantidade</th>
-			      <th>Caixas</th>
-			      <th>Data de retirada</th>
-			    </tr>
-			  </thead>
-			  <tbody>
-			    <tr>
-			      <td>Carmo</td>
-			      <td>50</td>
-			      <td>caixas</td>
-			      <td>2 Abr 2016</td>
-			    </tr>
-			    <tr>
-			      <td>Itaquera</td>
-			      <td>230</td>
-			      <td>caixas</td>
-			      <td>27 Mar 2016</td>
-			    </tr>
-			  </tbody>
-			</table>
-		</div> -->
+		<div class="content-area">
+			<div ng-repeat="distribuicao in distribuicoes">
+				{{ distribuicao.receptor.nome }} <br>
+				{{ distribuicao.quantidade }} {{ distribuicao.unidadeDeMedida }} <br>
+				{{ distribuicao.dataDeRetirada | date: "dd-MM-yyyy" }}
+			</div>
+		</div>
+		
 
-<!-- 		<p>Distribuir o produto para uma unidade do Sesc</p>
- -->
-		<ng-form name="nestedForm">
-			<div class="form-group">
-				<div class="btn-group" uib-dropdown is-open="status.isopen">
-			      <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">
-			        Escolha a unidade <span class="caret"></span>
-			      </button>
-			      <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
-			        <li role="menuitem"><a href="#">Carmo</a></li>
-			        <li role="menuitem"><a href="#">Itaquera</a></li>
-			        <li role="menuitem"><a href="#">Santos</a></li>
-			        <li class="divider"></li>
-			        <li role="menuitem"><a href="#">Separated link</a></li>
-			      </ul>
-			    </div>
-			</div>
-			<div class="form-group">
-				<label>Quantidade | unidade de medida</label>
-				<input type="text" class="form-control" required ng-model="model.name"/>
-			</div>
-			<div class="form-group">
-				<label>Data a retirar</label>
-				<!-- <input type="text" class="form-control" required ng-model="model.name"/> -->
-				<input type="date" class="form-control"/>
-			</div>
-		</ng-form>
-
-		<button type="button" class="btn btn-primary pull-right" ng-click="novaUnidade()">
+		<button 
+			type="button"
+			class="btn btn-primary pull-right"
+			ng-click="abrirFormulario()"
+			ng-show="!formularioAberto">
 			<i class="glyphicon glyphicon-plus"></i> Unidade
 		</button>
 
+		<form ng-show="formularioAberto">
+			<div class="form-group">
 
-		<button type="button" class="btn btn-primary" ng-click="salvar()">Salvar</button>
+				<select ng-model="novaDistribuicao.receptor" class="form-control">
+					<option value="">Escolha a unidade</option>
+					<option
+						ng-repeat="receptor in receptores"
+						value="{{ receptor }}">
+						{{ receptor.nome }}
+					</option>
+				</select>
 
+			</div>
+			<div class="form-group">
+				<label>Quantidade | {{ novaDistribuicao.unidadeDeMedida }}</label>
+				<input type="text" class="form-control" required ng-model="novaDistribuicao.quantidade"/>
+			</div>
+			<div class="form-group">
+				<label>Data a retirar</label>
+				<input type="date" class="form-control" ng-model="novaDistribuicao.dataDeRetirada"/>
+			</div>
+
+			<button type="button" class="btn btn-primary pull-right" ng-click="
+			salvarECriarNovaDistribuicao()">
+				<i class="glyphicon glyphicon-plus"></i> Unidade
+			</button>
+
+			<button type="button" class="btn btn-primary" ng-click="salvar()">Salvar</button>
+		</form>
+	
 		<p>{{ feedback }}</p>
 	</div>
 
 	<div class="modal-footer">
-		<button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+		<button type="button" class="btn btn-default" ng-click="$dismiss()">Cancel</button>
 		<button type="button" class="btn btn-primary" ng-click="finalizarDistribuicao()">Finalizar distribuição</button>
 	</div>
 </div>
