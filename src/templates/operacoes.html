@@ -1,0 +1,25 @@
+operacoes
+
+<table class="table table-hover table-bordered">
+  <thead class="thead-default">
+    <tr>
+      <th>Produto</th>
+      <th>Validade</th>
+      <th>Quantidade</th>
+      <th>Unidade</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr ng-repeat="operacao in operacoes">
+      <td>{{ operacao.produto.descricao }}</td>
+      <td>{{ operacao.produto.validade | date: "dd-MM-yyyy" }}</td>
+      <td>{{ operacao.quantidade }}</td>
+      <td>{{ operacao.unidadeDeMedida }}</td>
+      <td>
+        <button ng-click="deleteOperacao(operacao)">remover</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

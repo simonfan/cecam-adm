@@ -5,9 +5,10 @@
 	</div>
 	<div class="modal-body">
 		<div class="content-area">
-			{{ resumo.descricao }}<br>
+			{{ resumo.produto.descricao }}<br>
 			{{ resumo.estoque }} {{ resumo.unidadeDeMedida }} ({{ resumo.estoque - resumo.aDistribuir }} distribuido)<br>
-			validade: <b>{{ resumo.validade | date: "dd-MM-yyyy" }}</b>
+			{{ resumo.aDistribuir }} {{ resumo.unidadeDeMedida }} a distribuir<br>
+			validade: <b>{{ resumo.produto.validade | date: "dd-MM-yyyy" }}</b>
 		</div>
 
 		<div class="content-area">
@@ -15,6 +16,8 @@
 				{{ distribuicao.receptor.nome }} <br>
 				{{ distribuicao.quantidade }} {{ distribuicao.unidadeDeMedida }} <br>
 				{{ distribuicao.dataDeRetirada | date: "dd-MM-yyyy" }}
+
+				<button ng-click="deleteDistribuicao(distribuicao)">cancelar</button>
 			</div>
 		</div>
 		

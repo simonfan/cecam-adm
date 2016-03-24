@@ -20,8 +20,8 @@ estoque
   <tbody>
 
     <tr ng-repeat="item in resumo">
-      <td>{{ item.descricao }}</td>
-      <td>{{ item.validade | date: "dd-mm-yyyy" }}</td>
+      <td>{{ item.produto.descricao }}</td>
+      <td>{{ item.produto.validade | date: "dd-MM-yyyy" }}</td>
       <td>{{ item.estoque }}</td>
       <td>{{ item.unidadeDeMedida }}</td>
       <td>
