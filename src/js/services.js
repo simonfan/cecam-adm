@@ -5,7 +5,7 @@ angular.module('cecamAdm.services', [])
     list: function (query) {
 
       console.log(query);
-      return $http.get('http://localhost:4000/estoque/operacoes', {
+      return $http.get('https://cecam-api.herokuapp.com/estoque/operacoes', {
         params: {
           dbQuery: query
         }
@@ -13,14 +13,14 @@ angular.module('cecamAdm.services', [])
     },
 
     create: function (data) {
-      return $http.post('http://localhost:4000/estoque/operacao', data)
+      return $http.post('https://cecam-api.herokuapp.com/estoque/operacao', data)
         .then(function (response) {
           return response.data;
         });
     },
 
     delete: function (opid) {
-      return $http.delete('http://localhost:4000/estoque/operacao/' + opid);
+      return $http.delete('https://cecam-api.herokuapp.com/estoque/operacao/' + opid);
     }
   };
 })
@@ -28,15 +28,15 @@ angular.module('cecamAdm.services', [])
 .factory('Produto', function ($http) {
   return {
     get: function (produtoId) {
-      return $http.get('http://localhost:4000/estoque/produto/' + produtoId);
+      return $http.get('https://cecam-api.herokuapp.com/estoque/produto/' + produtoId);
     },
 
     list: function () {
-      return $http.get('http://localhost:4000/estoque/produtos');
+      return $http.get('https://cecam-api.herokuapp.com/estoque/produtos');
     },
 
     create: function (data) {
-      return $http.post('http://localhost:4000/estoque/produto', data);
+      return $http.post('https://cecam-api.herokuapp.com/estoque/produto', data);
     }
   }
 })
@@ -44,7 +44,7 @@ angular.module('cecamAdm.services', [])
 .factory('Estoque', function ($http) {
   return {
     registerDelivery: function (distribuicaoId) {
-      return $http.post('http://localhost:4000/estoque/saida', {
+      return $http.post('https://cecam-api.herokuapp.com/estoque/saida', {
         distribuicao: {
           _id: distribuicaoId
         }
@@ -60,25 +60,25 @@ angular.module('cecamAdm.services', [])
 .factory('Distribuicao', function ($http) {
   return {
     create: function (data) {
-      return $http.post('http://localhost:4000/estoque/distribuicao', data)
+      return $http.post('https://cecam-api.herokuapp.com/estoque/distribuicao', data)
         .then(function (response) {
           return response.data;
         });
     },
 
     update: function (distId, distData) {
-      return $http.put('http://localhost:4000/estoque/distribuicao/' + distId, distData)
+      return $http.put('https://cecam-api.herokuapp.com/estoque/distribuicao/' + distId, distData)
         .then(function (response) {
           return response.data;
         });
     },
 
     delete: function (id) {
-      return $http.delete('http://localhost:4000/estoque/distribuicao/' + id);
+      return $http.delete('https://cecam-api.herokuapp.com/estoque/distribuicao/' + id);
     },
 
     list: function (query) {
-      return $http.get('http://localhost:4000/estoque/distribuicoes', {
+      return $http.get('https://cecam-api.herokuapp.com/estoque/distribuicoes', {
         params: {
           dbQuery: query
         }
@@ -89,7 +89,7 @@ angular.module('cecamAdm.services', [])
     },
 
     groupByDate: function (query) {
-      return $http.get('http://localhost:4000/estoque/distribuicao/groupByDate', {
+      return $http.get('https://cecam-api.herokuapp.com/estoque/distribuicao/groupByDate', {
           params: {
             dbQuery: query
           }
@@ -100,7 +100,7 @@ angular.module('cecamAdm.services', [])
     },
 
     groupByReceptor: function (query) {
-      return $http.get('http://localhost:4000/estoque/distribuicao/groupByReceptor', {
+      return $http.get('https://cecam-api.herokuapp.com/estoque/distribuicao/groupByReceptor', {
           params: {
             dbQuery: query
           }
@@ -111,7 +111,7 @@ angular.module('cecamAdm.services', [])
     },
 
     groupByDateAndReceptor: function (query) {
-      return $http.get('http://localhost:4000/estoque/distribuicao/groupByDateAndReceptor', {
+      return $http.get('https://cecam-api.herokuapp.com/estoque/distribuicao/groupByDateAndReceptor', {
           params: {
             dbQuery: query
           }
@@ -151,7 +151,7 @@ angular.module('cecamAdm.services', [])
 .factory('Estoque', function ($http) {
   return {
     getResumo: function () {
-      return $http.get('http://localhost:4000/estoque/resumo');
+      return $http.get('https://cecam-api.herokuapp.com/estoque/resumo');
     }
   }
 })
@@ -159,7 +159,7 @@ angular.module('cecamAdm.services', [])
 .factory('Receptor', function ($http) {
   return {
     list: function (query) {
-      return $http.get('http://localhost:4000/estoque/receptores', query);
+      return $http.get('https://cecam-api.herokuapp.com/estoque/receptores', query);
     }
   }
 });
