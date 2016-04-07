@@ -3,8 +3,12 @@ angular.module('cecamAdm.services', [])
 .factory('Operacao', function ($http) {
   return {
     list: function (query) {
+
+      console.log(query);
       return $http.get('http://localhost:4000/estoque/operacoes', {
-        data: query
+        params: {
+          dbQuery: query
+        }
       });
     },
 
@@ -13,6 +17,10 @@ angular.module('cecamAdm.services', [])
         .then(function (response) {
           return response.data;
         });
+    },
+
+    delete: function (opid) {
+      return $http.delete('http://localhost:4000/estoque/operacao/' + opid);
     }
   };
 })
@@ -35,11 +43,19 @@ angular.module('cecamAdm.services', [])
 
 .factory('Estoque', function ($http) {
   return {
-    getResumo: function () {
-      return $http.get('http://localhost:4000/estoque/resumo');
+    registerDelivery: function (distribuicaoId) {
+      return $http.post('http://localhost:4000/estoque/saida', {
+        distribuicao: {
+          _id: distribuicaoId
+        }
+      })
+      .then(function (response) {
+        return response.data;
+      });
     }
   }
 })
+
 
 .factory('Distribuicao', function ($http) {
   return {
@@ -50,10 +66,92 @@ angular.module('cecamAdm.services', [])
         });
     },
 
+    update: function (distId, distData) {
+      return $http.put('http://localhost:4000/estoque/distribuicao/' + distId, distData)
+        .then(function (response) {
+          return response.data;
+        });
+    },
+
+    delete: function (id) {
+      return $http.delete('http://localhost:4000/estoque/distribuicao/' + id);
+    },
+
     list: function (query) {
       return $http.get('http://localhost:4000/estoque/distribuicoes', {
-        params: query,
+        params: {
+          dbQuery: query
+        }
+      })
+      .then(function (response) {
+        return response.data;
       });
+    },
+
+    groupByDate: function (query) {
+      return $http.get('http://localhost:4000/estoque/distribuicao/groupByDate', {
+          params: {
+            dbQuery: query
+          }
+        })
+        .then(function (response) {
+          return response.data;
+        });
+    },
+
+    groupByReceptor: function (query) {
+      return $http.get('http://localhost:4000/estoque/distribuicao/groupByReceptor', {
+          params: {
+            dbQuery: query
+          }
+        })
+        .then(function (response) {
+          return response.data;
+        });
+    },
+
+    groupByDateAndReceptor: function (query) {
+      return $http.get('http://localhost:4000/estoque/distribuicao/groupByDateAndReceptor', {
+          params: {
+            dbQuery: query
+          }
+        })
+        .then(function (response) {
+          return response.data;
+        });
+    },
+
+    /**
+     * Computes the virtual status of a group of distributions
+     * @param  {Object} distAggregate
+     * @return {String}
+     */
+    computeDistribuicaoAggregateStatus: function (distAggregate) {
+
+      var hasASepararStatus = distAggregate.statuses.indexOf('a-separar') > -1;
+      var hasSeparadoStatus = distAggregate.statuses.indexOf('separado') > -1;
+
+      if (hasASepararStatus && hasSeparadoStatus) {
+        // mixed statuses
+        return 'separando';
+      } else if (hasASepararStatus) {
+        // only a-separar
+        return 'a-separar';
+      } else if (hasSeparadoStatus) {
+        // only separado
+        return 'separado';
+      } else {
+        // default fallback
+        return '-';
+      }
+    }
+  }
+})
+
+.factory('Estoque', function ($http) {
+  return {
+    getResumo: function () {
+      return $http.get('http://localhost:4000/estoque/resumo');
     }
   }
 })
