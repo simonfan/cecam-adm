@@ -1,6 +1,6 @@
 angular.module('cecamAdm.controllers')
 
-.controller('DistribuicaoCtrl', function ($scope, resumo, Distribuicao, Receptor) {
+.controller('DistribuicaoCtrl', function ($scope, resumo, Distribuicao, Receptor, $q) {
 
   // auxiliary functions
   function _setupNovaDistribuicao() {
@@ -53,6 +53,13 @@ angular.module('cecamAdm.controllers')
 
   // funcao auxiliar para salvar distribuicao
   function _salvarDistribuicao() {
+
+    if (!$scope.novaDistribuicao.receptor) {
+      return $q(function (resolve, reject) {
+        resolve(true);
+      });
+    }
+
     // make sure receptor is an object
     $scope.novaDistribuicao.receptor = (typeof $scope.novaDistribuicao.receptor === 'string') ? 
       JSON.parse($scope.novaDistribuicao.receptor) : $scope.novaDistribuicao.receptor; 
