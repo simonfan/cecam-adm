@@ -28,7 +28,15 @@ angular.module('cecamAdm.controllers')
     })
     .then(function (distribuicoes) {
       $scope.distribuicoes = distribuicoes;
+
+      // mostrar ou esconder tabela de distribuicoes ja efetuadas HELP ME SIMON!!!
+      if ($scope.distribuicoes.length > 0) {
+        $scope.temDistribuicoes = true;
+      } else {
+        $scope.temDistribuicoes = false;
+      }
     });
+    
   }
 
   $scope.resumo = resumo;
@@ -70,7 +78,7 @@ angular.module('cecamAdm.controllers')
 
         // zerar novaDistribuicao
         _setupNovaDistribuicao();
-      });
+      });  
   }
 
   $scope.salvar = function () {

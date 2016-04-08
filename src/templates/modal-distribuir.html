@@ -1,39 +1,66 @@
 <div class="modal-distribuir">
 	<div class="modal-header">
 		<button type="button" class="close" ng-click="$dismiss()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		<h4 class="modal-title">Distribuir produto pelas unidades do SESC</h4>
+		<h4 class="modal-title">Distribuir doação pelas unidades do SESC</h4>
 	</div>
 	<div class="modal-body">
 		<div class="content-area">
-			{{ resumo.produto.descricao }}<br>
-			{{ resumo.estoque }} {{ resumo.unidadeDeMedida }} ({{ resumo.estoque - resumo.aDistribuir }} distribuido)<br>
-			{{ resumo.aDistribuir }} {{ resumo.unidadeDeMedida }} a distribuir<br>
-			validade: <b>{{ resumo.produto.validade | date: "dd-MM-yyyy" }}</b>
+			<h4>{{ resumo.produto.descricao }}</h4>
+			<h5>Quantidade total: <b>{{ resumo.estoque }}</b> {{ resumo.unidadeDeMedida }} (<b>{{ resumo.estoque - resumo.aDistribuir }}</b> distribuído)</h5>
+			<h5>Restante a distribuir: <b>{{ resumo.aDistribuir }}</b> {{ resumo.unidadeDeMedida }}</h5>
+			<h5>Validade: <b>{{ resumo.produto.validade | date: "dd-MM-yyyy" }}</b></h5>
 		</div>
 
-		<div class="content-area">
+		<!-- <div class="content-area">
 			<div ng-repeat="distribuicao in distribuicoes">
 				{{ distribuicao.receptor.nome }} <br>
 				{{ distribuicao.quantidade }} {{ distribuicao.unidadeDeMedida }} <br>
 				{{ distribuicao.dataDeRetirada | date: "dd-MM-yyyy" }}
 				<button ng-click="deleteDistribuicao(distribuicao)">cancelar</button>
 			</div>
+		</div> -->
+
+		<div ng-show="temDistribuicoes">
+		  <!-- Default panel contents -->
+		  <!-- <div class="panel-heading">Distribuições efetuadas</div> -->
+		  <h4>Distribuições efetuadas:</h4>
+
+		  <!-- Table -->
+		  <table class="table">
+		    <thead>
+		      <tr>
+		        <th>Unidade do SESC</th>
+		        <th>Quantidade</th>
+		        <th>Data a retirar</th>
+		        <th>Cancelar</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    	<tr ng-repeat="distribuicao in distribuicoes">
+					<td>{{ distribuicao.receptor.nome }} </td>
+					<td>{{ distribuicao.quantidade }} {{ distribuicao.unidadeDeMedida }} </td>
+					<td>{{ distribuicao.dataDeRetirada | date: "dd-MM-yyyy" }} </td>
+					<td><button class="btn btn-default" ng-click="deleteDistribuicao(distribuicao)">cancelar</button></td>
+				</tr>
+		    </tbody>
+		  </table>
 		</div>
 		
 
 		<button 
 			type="button"
-			class="btn btn-primary pull-right"
+			class="btn btn-primary"
 			ng-click="abrirFormulario()"
 			ng-show="!formularioAberto">
 			<i class="glyphicon glyphicon-plus"></i> Unidade
 		</button>
 
 		<form ng-show="formularioAberto">
+			<h4>Distribuir para unidade:</h4>
 			<div class="form-group">
 
 				<select ng-model="novaDistribuicao.receptor" class="form-control">
-					<option value="">Escolha a unidade</option>
+					<option value="">Escolha a unidade do SESC</option>
 					<option
 						ng-repeat="receptor in receptores"
 						value="{{ receptor }}">
@@ -63,7 +90,7 @@
 	</div>
 
 	<div class="modal-footer">
-		<button type="button" class="btn btn-default" ng-click="$dismiss()">Cancel</button>
-		<button type="button" class="btn btn-primary" ng-click="finalizarDistribuicao()">Finalizar distribuição</button>
+		<button type="button" class="btn btn-default" ng-click="$dismiss()">Cancelar</button>
+		<button type="button" class="btn btn-primary" ng-click="finalizarDistribuicao()">finalizar distribuição</button>
 	</div>
 </div>
