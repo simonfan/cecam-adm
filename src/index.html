@@ -29,7 +29,10 @@
       </ul>
     </nav>
     
-    <div ui-view class="container-fluid"></div>
+    <div
+      ui-view
+      id="main-view-wrapper"
+      class="container-fluid"></div>
   </div>
 
   <div id="loading-indicator" ng-class="{ 'active': isLoading }">
