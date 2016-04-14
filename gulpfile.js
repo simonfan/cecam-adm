@@ -1,6 +1,10 @@
 var gulp        = require('gulp');
 // Load all installed gulp plugins into $
 var $ = require('gulp-load-plugins')();
+var polybuild = require('polybuild');
+
+var rimraf = require('rimraf');
+var mergeStream = require('merge-stream');
 
 var browserSync = require('browser-sync');
 
@@ -101,6 +105,40 @@ gulp.task('serve:develop', function() {
     open: true,
   });
 
+});
+
+// Static server
+gulp.task('serve:dist', function() {
+
+  var bs = browserSync({
+    ghostMode: false,
+    port: 4000,
+    server: {
+      baseDir: 'dist',
+    },
+    open: true,
+  });
+
+});
+
+gulp.task('distribute', function() {
+  rimraf.sync(path.join(__dirname, 'dist'));
+
+  var copySrc = [
+    'src/templates/**/*.html',
+    'src/bower_components/font-awesome/fonts/**/*'
+  ];
+
+  var copyStream = gulp.src(copySrc, { base: 'src' }).pipe(gulp.dest('dist'));
+
+  var buildStream = gulp.src('src/index.html')
+    .pipe(polybuild({
+      maximumCrush: false
+    }))
+    .pipe($.if('index.build.html', $.rename('index.html')))
+    .pipe(gulp.dest('dist'));
+
+  return mergeStream([copyStream, buildStream]);
 });
 
 gulp.task('develop', ['watch', 'serve:develop']);

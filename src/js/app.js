@@ -1,7 +1,6 @@
 angular.module('cecamAdm', [
   'cecamAdm.controllers',
   'cecamAdm.services',
-  'firebase',
   'ui.router',
   'ui.bootstrap',
   'ui.grid'
