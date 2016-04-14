@@ -8,21 +8,10 @@
 			<h4>{{ resumo.produto.descricao }}</h4>
 			<h5>Quantidade total: <b>{{ resumo.estoque }}</b> {{ resumo.unidadeDeMedida }} (<b>{{ resumo.estoque - resumo.aDistribuir }}</b> distribuído)</h5>
 			<h5>Restante a distribuir: <b>{{ resumo.aDistribuir }}</b> {{ resumo.unidadeDeMedida }}</h5>
-			<h5>Validade: <b>{{ resumo.produto.validade | date: "dd-MM-yyyy" }}</b></h5>
+			<h5>Validade: <b>{{ resumo.produto.validade | date:"dd 'de' MMMM yyyy" }}</b></h5>
 		</div>
 
-		<!-- <div class="content-area">
-			<div ng-repeat="distribuicao in distribuicoes">
-				{{ distribuicao.receptor.nome }} <br>
-				{{ distribuicao.quantidade }} {{ distribuicao.unidadeDeMedida }} <br>
-				{{ distribuicao.dataDeRetirada | date: "dd-MM-yyyy" }}
-				<button ng-click="deleteDistribuicao(distribuicao)">cancelar</button>
-			</div>
-		</div> -->
-
-		<div ng-show="temDistribuicoes">
-		  <!-- Default panel contents -->
-		  <!-- <div class="panel-heading">Distribuições efetuadas</div> -->
+		<div ng-show="distribuicoes.length > 0">
 		  <h4>Distribuições efetuadas:</h4>
 
 		  <!-- Table -->
@@ -39,14 +28,13 @@
 		    	<tr ng-repeat="distribuicao in distribuicoes">
 					<td>{{ distribuicao.receptor.nome }} </td>
 					<td>{{ distribuicao.quantidade }} {{ distribuicao.unidadeDeMedida }} </td>
-					<td>{{ distribuicao.dataDeRetirada | date: "dd-MM-yyyy" }} </td>
+					<td>{{ distribuicao.dataDeRetirada | date:"dd 'de' MMMM yyyy" }} </td>
 					<td><button class="btn btn-default" ng-click="deleteDistribuicao(distribuicao)">cancelar</button></td>
 				</tr>
 		    </tbody>
 		  </table>
 		</div>
 		
-
 		<button 
 			type="button"
 			class="btn btn-primary"
@@ -57,29 +45,48 @@
 
 		<form ng-show="formularioAberto">
 			<h4>Distribuir para unidade:</h4>
-			<div class="form-group">
 
-				<select ng-model="novaDistribuicao.receptor" class="form-control">
-					<option value="">Escolha a unidade do SESC</option>
-					<option
-						ng-repeat="receptor in receptores"
-						value="{{ receptor }}">
-						{{ receptor.nome }}
-					</option>
-				</select>
+			<div class="row">
 
+				<div class="form-group col-sm-12">
+
+					<label>Escolha a unidade do SESC</label>
+					<select
+						ng-model="novaDistribuicao.receptor"
+						class="form-control">
+						<option
+							ng-repeat="receptor in receptores"
+							value="{{ receptor }}">
+							{{ receptor.nome }}
+						</option>
+					</select>
+
+				</div>
 			</div>
-			<div class="form-group">
-				<label>Quantidade | {{ novaDistribuicao.unidadeDeMedida }}</label>
-				<input type="text" class="form-control" required ng-model="novaDistribuicao.quantidade"/>
-			</div>
-			<div class="form-group">
-				<label>Data a retirar</label>
-				<input
-					type="date"
-					required
-					class="form-control"
-					ng-model="novaDistribuicao.dataDeRetirada"/>
+			<div class="row">
+				<div class="form-group col-sm-6">
+					<label>Quantidade | {{ novaDistribuicao.unidadeDeMedida }}</label>
+
+					<div class="input-group">
+						<input
+							type="number"
+							class="form-control"
+							required ng-model="novaDistribuicao.quantidade">
+						<div class="input-group-addon">
+							{{ novaDistribuicao.unidadeDeMedida }}
+						</div>
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label>Data a retirar</label>
+					<input
+						type="date"
+						required
+	          min="{{ today | date: 'yyyy-MM-dd' }}"
+	          max="{{ resumo.produto.validade | date: 'yyyy-MM-dd' }}"
+						class="form-control"
+						ng-model="novaDistribuicao.dataDeRetirada"/>
+				</div>
 			</div>
 <!-- 
 			<button type="button" class="btn btn-primary pull-right" ng-click="
@@ -91,8 +98,6 @@
 
 			<div style="clear: both;"></div>
 		</form>
-	
-		<p>{{ feedback }}</p>
 	</div>
 
 	<div class="modal-footer">

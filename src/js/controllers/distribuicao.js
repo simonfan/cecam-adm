@@ -2,6 +2,8 @@ angular.module('cecamAdm.controllers')
 
 .controller('DistribuicaoCtrl', function ($scope, resumo, Distribuicao, Receptor, $q) {
 
+  $scope.today = new Date();
+
   // auxiliary functions
   function _setupNovaDistribuicao() {
     // objeto para guardar dados referentes a nova distribuicao
@@ -28,13 +30,6 @@ angular.module('cecamAdm.controllers')
     })
     .then(function (distribuicoes) {
       $scope.distribuicoes = distribuicoes;
-
-      // mostrar ou esconder tabela de distribuicoes ja efetuadas HELP ME SIMON!!!
-      if ($scope.distribuicoes.length > 0) {
-        $scope.temDistribuicoes = true;
-      } else {
-        $scope.temDistribuicoes = false;
-      }
     });
     
   }
@@ -74,6 +69,9 @@ angular.module('cecamAdm.controllers')
 
     return Distribuicao.create($scope.novaDistribuicao)
       .then(function (novaDistribuicao) {
+
+        console.log(novaDistribuicao);
+
         $scope.distribuicoes.unshift(novaDistribuicao);
 
         // zerar novaDistribuicao

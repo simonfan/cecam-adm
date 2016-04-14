@@ -1,4 +1,4 @@
-estoque
+<h2>estoque</h2>
 
 <ul>
   <li ng-repeat="operacao in operacoes">
@@ -21,7 +21,7 @@ estoque
 
     <tr ng-repeat="item in resumo">
       <td>{{ item.produto.descricao }}</td>
-      <td>{{ item.produto.validade | date: "dd-MM-yyyy" }}</td>
+      <td>{{ item.produto.validade | date:"dd 'de' MMMM yyyy" }}</td>
       <td>{{ item.estoque }}</td>
       <td>{{ item.unidadeDeMedida }}</td>
       <td>

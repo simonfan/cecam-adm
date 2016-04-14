@@ -10,13 +10,7 @@ angular.module('cecamAdm', [
 .config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
-
-
-  .state('home', {
-    url: '/',
-    templateUrl: 'templates/home.html'
-  })
-
+  
   .state('estoque', {
     url: '/estoque',
     templateUrl: 'templates/estoque.html',
