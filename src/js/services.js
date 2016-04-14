@@ -160,6 +160,17 @@ angular.module('cecamAdm.services', [])
   return {
     list: function (query) {
       return $http.get('https://cecam-api.herokuapp.com/estoque/receptores', query);
+    },
+
+    create: function (data) {
+      return $http.post('https://cecam-api.herokuapp.com/estoque/receptor', data)
+        .then(function (response) {
+          return response.data;
+        });
+    },
+
+    delete: function (receptorId) {
+      return $http.delete('https://cecam-api.herokuapp.com/estoque/receptor/' + receptorId);
     }
   }
 });

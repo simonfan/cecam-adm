@@ -1,0 +1,21 @@
+<h2>receptores cadastrados</h2>
+
+<table class="table table-hover table-bordered">
+  <thead class="thead-default">
+    <tr>
+      <th>Nome</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr ng-repeat="receptor in receptores">
+      <td>{{ receptor.nome }}</td>
+      <td>
+        <button class="btn btn-danger" ng-click="deleteReceptor(receptor)">remover</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button class="btn btn-primary" ng-click="openNewReceptorModal()">Cadastrar novo receptor</button>
