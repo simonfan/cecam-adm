@@ -56,3 +56,37 @@
 // Utility classes
 @import "./bower_components/bootstrap/less/utilities.less";
 @import "./bower_components/bootstrap/less/responsive-utilities.less";
+
+
+#loading-indicator {
+
+  position: fixed;
+  z-index: 9999999999999999999;
+  top: 0;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+
+  overflow: hidden;
+
+  opacity: 0;
+
+  background-color: rgba(0, 0, 0, 0.5);
+
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  font-size: 20px;
+
+  transition: opacity 0.3s ease;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  &.active {
+    opacity: 1;
+
+    right: 0;
+  }
+}

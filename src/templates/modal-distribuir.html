@@ -75,15 +75,21 @@
 			</div>
 			<div class="form-group">
 				<label>Data a retirar</label>
-				<input type="date" class="form-control" ng-model="novaDistribuicao.dataDeRetirada"/>
+				<input
+					type="date"
+					required
+					class="form-control"
+					ng-model="novaDistribuicao.dataDeRetirada"/>
 			</div>
-
+<!-- 
 			<button type="button" class="btn btn-primary pull-right" ng-click="
 			salvarECriarNovaDistribuicao()">
 				<i class="glyphicon glyphicon-plus"></i> Unidade
 			</button>
+ -->
+			<button type="button" class="btn btn-primary pull-right" ng-click="salvar()">Salvar</button>
 
-			<button type="button" class="btn btn-primary" ng-click="salvar()">Salvar</button>
+			<div style="clear: both;"></div>
 		</form>
 	
 		<p>{{ feedback }}</p>
