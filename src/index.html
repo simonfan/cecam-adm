@@ -13,16 +13,23 @@
 </head>
 <body ng-controller="AppCtrl">
 
-  <div class="content">
+  <div>
 
     <nav>
-      <!-- <a href="#/">home</a> -->
-      <a href="#/estoque">estoque</a>
-      <a href="#/operacoes">operacoes</a>
-      <a href="#/receptores">receptores</a>
+      <ul class="nav nav-tabs">
+        <li role="presentation">
+          <a href="#/estoque">Estoque</a>
+        </li>
+        <li role="presentation">
+          <a href="#/operacoes">Operacoes</a>
+        </li>
+        <li role="presentation">
+          <a href="#/receptores">Receptores</a>
+        </li>
+      </ul>
     </nav>
     
-    <div ui-view></div>
+    <div ui-view class="container-fluid"></div>
   </div>
 
   <div id="loading-indicator" ng-class="{ 'active': isLoading }">

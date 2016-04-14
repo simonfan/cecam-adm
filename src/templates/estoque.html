@@ -26,13 +26,14 @@
       <td>{{ item.unidadeDeMedida }}</td>
       <td>
         <p class="quantidade-distribuida">
-          {{ item.estoque - item.aDistribuir }} distribuido
+          {{ item.estoque - item.aDistribuir }} / {{ item.estoque }} distribuidos
         </p>
-        <button ng-if="item.aDistribuir > 0" class="btn btn-primary" ng-click="openModalDistribuir(item)">
-          distribuir
-        </button>
-        <button ng-if="item.aDistribuir === 0" class="btn btn-primary" ng-click="openModalDistribuir(item)">
-          ver detalhes
+        <button class="btn btn-primary" ng-click="openModalDistribuir(item)">
+          <span ng-if="item.aDistribuir > 0">distribuir</span>
+          <span ng-if="item.aDistribuir === 0">ver detalhes</span>
+
+          <!-- error case: should never happen -->
+          <span ng-if="item.aDistribuir < 0">ver detalhes</span>
         </button>
       </td>
     </tr>

@@ -1,6 +1,6 @@
 <h2>receptores cadastrados</h2>
 
-<table class="table table-hover table-bordered">
+<table class="table table-hover">
   <thead class="thead-default">
     <tr>
       <th>Nome</th>
@@ -12,7 +12,9 @@
     <tr ng-repeat="receptor in receptores">
       <td>{{ receptor.nome }}</td>
       <td>
-        <button class="btn btn-danger" ng-click="deleteReceptor(receptor)">remover</button>
+        <button class="btn btn-danger" ng-click="deleteReceptor(receptor)">
+          <i class="fa fa-close"></i>
+        </button>
       </td>
     </tr>
   </tbody>

@@ -18,7 +18,9 @@
       <td>{{ operacao.quantidade }}</td>
       <td>{{ operacao.unidadeDeMedida }}</td>
       <td>
-        <button ng-click="deleteOperacao(operacao)">remover</button>
+        <button class="btn btn-danger" ng-click="deleteOperacao(operacao)">
+          <i class="fa fa-close"></i>
+        </button>
       </td>
     </tr>
   </tbody>
