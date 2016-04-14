@@ -1,0 +1,23 @@
+<h2>produtos cadastrados</h2>
+
+<button class="btn btn-primary" ng-click="openNewProdutoModal()">Cadastrar novo produto</button>
+
+<table class="table table-hover">
+  <thead class="thead-default">
+    <tr>
+      <th>Descricao</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr ng-repeat="produto in produtos">
+      <td>{{ produto.descricao }}</td>
+      <td>
+        <button class="btn btn-danger" ng-click="deleteProduto(produto)">
+          <i class="fa fa-close"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

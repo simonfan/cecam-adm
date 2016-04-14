@@ -26,6 +26,12 @@ angular.module('cecamAdm', [
     url: '/receptores',
     templateUrl: 'templates/receptores.html',
     controller: 'ReceptoresCtrl',
+  })
+
+  .state('produtos', {
+    url: '/produtos',
+    templateUrl: 'templates/produtos.html',
+    controller: 'ProdutosCtrl',
   });
   
   // if none of the above states are matched, use this as the fallback

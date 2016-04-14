@@ -80,16 +80,16 @@ gulp.task('less', function () {
 gulp.task('watch', function () {
 
   // HTML
-  gulp.watch('src/**/*.html')
+  gulp.watch(['src/**/*.html', '!src/bower_components/**/*'])
     .on('change', browserSync.reload);
   
   // JS 
-  gulp.watch('src/**/*.js')
+  gulp.watch(['src/**/*.js', '!src/bower_components/**/*'])
     .on('change', browserSync.reload);
 
   // LESS
-  gulp.watch('src/**/*.less', ['less']);
-  gulp.watch('src/**/*.css')
+  gulp.watch(['src/**/*.less', '!src/bower_components/**/*'], ['less']);
+  gulp.watch(['src/**/*.css', '!src/bower_components/**/*'])
     .on('change', browserSync.reload);
 });
 

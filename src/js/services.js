@@ -37,6 +37,10 @@ angular.module('cecamAdm.services', [])
 
     create: function (data) {
       return $http.post('https://cecam-api.herokuapp.com/estoque/produto', data);
+    },
+
+    delete: function (produtoId) {
+      return $http.delete('https://cecam-api.herokuapp.com/estoque/produto/' + produtoId);
     }
   }
 })
